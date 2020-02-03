@@ -10,5 +10,10 @@ if not os.path.exists(str(folder)):
 
 with open('output.pdf', 'wb') as f:
     pics = os.listdir(str(folder))
+    pics.sort()
+    file_list = []
     for pic in pics:
-        num = pic.replace(".jpg", "")
+        # f.write(img2pdf.convert([i for i in os.listdir(str(folder)) if i.endswith(".jpg")]))
+        file_name = "{}/{}".format(folder, pic)
+        file_list.append(file_name)
+    f.write(img2pdf.convert(file_list))

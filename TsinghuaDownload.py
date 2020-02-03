@@ -49,6 +49,8 @@ def get_book():
     if not os.path.exists("3208401"):
         os.mkdir("3208401")
     for page in range(1, int(pages) + 1):
+        if os.path.isfile("3208401/{}.jpg".format(page)):
+            continue
         jwtencoded = gen_jwt(get_payload(), str(page))
         imgurl = 'https://lib-nuanxin.wqxuetang.com/page/img/3208401/{}?k='.format(str(page))
         url = imgurl + jwtencoded
@@ -64,7 +66,7 @@ def get_book():
             f.write(response.content)
             print("Saving page {}".format(str(page)))
 
-
+        f.close()
 # print(gen_jwt(get_payload()))
 if __name__ == '__main__':
     get_book()
